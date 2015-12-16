@@ -26,7 +26,7 @@
 ;; Non-openshift deployments will bind to the following address and
 ;; port:
 
-(defvar *default-port-string* "80")
+(defvar *default-port-string* "8080")
 
 ;; Our server....
 
