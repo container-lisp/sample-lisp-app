@@ -1,4 +1,5 @@
-APP_EVAL="(progn (ql:quickload :webapp) (webapp:start-webapp))"
+APP_EVAL1="(ql:quickload :webapp)"
+APP_EVAL2="(webapp:start-webapp)"
 
 
 
