@@ -20,14 +20,6 @@
 
 (in-package :webapp)
 
-;; webapp can be run within the openshift environment, as well as
-;; interactively on your desktop.  Within the openshift environment,
-;; we bind to OPENSHIFT_INTERNAL_IP and OPENSHIFT_INTERNAL_PORT.
-;; Non-openshift deployments will bind to the following address and
-;; port:
-
-(defvar *default-port-string* "8080")
-
 ;; Our server....
 
 (defvar *hunchentoot-server* nil)
@@ -37,15 +29,13 @@
 (defun start-webapp (&rest interactive)
   "Start the web application and have the main thread sleep forever,
   unless INTERACTIVE is non-nil."
-  (let ((openshift-port (sb-ext:posix-getenv "OPENSHIFT_INTERNAL_PORT")))
-    (let ((port (if openshift-port openshift-port *default-port-string*)))
-      (format t "** Starting hunchentoot on ~A~%" port)
-      (setq *hunchentoot-server* (hunchentoot:start 
-				  (make-instance 'hunchentoot:easy-acceptor 
-						 :port (parse-integer port))))
-      (if (not interactive)
-	  (loop
-	   (sleep 3000))))))
+  (format t "** Starting hunchentoot on ~A~%" port)
+  (setq *hunchentoot-server* (hunchentoot:start 
+			      (make-instance 'hunchentoot:easy-acceptor 
+					     :port 80)))
+  (if (not interactive)
+      (loop
+       (sleep 3000))))))
 
 (defun stop-webapp ()
   "Stop the web application."
