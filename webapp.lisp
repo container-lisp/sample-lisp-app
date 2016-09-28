@@ -35,7 +35,7 @@
 					     :port 80)))
   (if (not interactive)
       (loop
-       (sleep 3000))))))
+       (sleep 3000))))
 
 (defun stop-webapp ()
   "Stop the web application."
