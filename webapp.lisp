@@ -29,7 +29,7 @@
 (defun start-webapp (&rest interactive)
   "Start the web application and have the main thread sleep forever,
   unless INTERACTIVE is non-nil."
-  (format t "** Starting hunchentoot on ~A~%" port)
+  (format t "** Starting hunchentoot on ~A~%" 80)
   (setq *hunchentoot-server* (hunchentoot:start 
 			      (make-instance 'hunchentoot:easy-acceptor 
 					     :port 80)))
@@ -40,3 +40,4 @@
 (defun stop-webapp ()
   "Stop the web application."
   (hunchentoot:stop *hunchentoot-server*))
+
