@@ -24,18 +24,23 @@
 
 (defvar *hunchentoot-server* nil)
 
+(defvar *default-port-string* "8080")
+
+
 ;; Start the web app.
 
 (defun start-webapp (&rest interactive)
   "Start the web application and have the main thread sleep forever,
   unless INTERACTIVE is non-nil."
-  (format t "** Starting hunchentoot on ~A~%" 80)
-  (setq *hunchentoot-server* (hunchentoot:start 
-			      (make-instance 'hunchentoot:easy-acceptor 
-					     :port 80)))
-  (if (not interactive)
-      (loop
-       (sleep 3000))))
+  (let ((openshift-port (sb-ext:posix-getenv "OPENSHIFT_PORT")))
+    (let ((port (if openshift-port openshift-port *default-port-string*)))
+      (format t "** Starting hunchentoot on ~A~%" port)
+      (setq *hunchentoot-server* (hunchentoot:start 
+				  (make-instance 'hunchentoot:easy-acceptor 
+						 :port (parse-integer port))))
+      (if (not interactive)
+	  (loop
+	   (sleep 3000))))))
 
 (defun stop-webapp ()
   "Stop the web application."
