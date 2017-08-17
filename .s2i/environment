@@ -1,8 +1,2 @@
-APP_EVAL1="(ql:quickload :webapp)"
+APP_SYSTEM_NAME=webapp
 APP_EVAL2="(webapp:start-webapp)"
-
-
-
-
-
-
