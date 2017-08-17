@@ -1,2 +1,2 @@
 APP_SYSTEM_NAME=webapp
-APP_EVAL2="(webapp:start-webapp)"
+APP_EVAL="(webapp:start-webapp)"
