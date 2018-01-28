@@ -1,6 +1,6 @@
 ;;; -*- Mode: LISP; Syntax: COMMON-LISP; Package: WEBAPP; Base: 10 -*-
 ;;;
-;;; Copyright (C) 2012  Anthony Green <green@spindazzle.org>
+;;; Copyright (C) 2012, 2017, 2018  Anthony Green <green@spindazzle.org>
 ;;;                         
 ;;; Webapp is free software; you can redistribute it and/or modify it
 ;;; under the terms of the GNU General Public License as published by
@@ -26,7 +26,6 @@
 
 (defvar *default-port-string* "8080")
 
-
 ;; Start the web app.
 
 (defun start-webapp (&rest interactive)
@@ -45,4 +44,16 @@
 (defun stop-webapp ()
   "Stop the web application."
   (hunchentoot:stop *hunchentoot-server*))
+
+(EVAL-WHEN (:COMPILE-TOPLEVEL :LOAD-TOPLEVEL :EXECUTE)
+
+  (hunchentoot:define-easy-handler (say-yo :uri "/yo") (name)
+    (setf (hunchentoot:content-type*) "text/plain")
+    (format nil "Hey~@[ ~A~]!" name))
+  
+  (hunchentoot:define-easy-handler (status :uri "/status") ()
+    (setf (hunchentoot:content-type*) "text/plain")
+    (format nil "It's all good"))
+
+  )
 

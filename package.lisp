@@ -1,6 +1,6 @@
 ;;; -*- Mode: LISP; Syntax: COMMON-LISP; Package: WEBAPP; Base: 10 -*-
 
-;;; Copyright (C) 2012  Anthony Green <green@spindazzle.org>
+;;; Copyright (C) 2012, 2017  Anthony Green <green@spindazzle.org>
 
 ;;; Webapp is free software; you can redistribute it and/or modify it
 ;;; under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
 ;;;; package.lisp
 
 (defpackage #:webapp
-  (:use #:hunchentoot #:cl)
+  (:use #:hunchentoot #:cl #:cl-pccre)
   (:shadow #:package)
   (:export #:start-webapp #:stop-webapp))
 
